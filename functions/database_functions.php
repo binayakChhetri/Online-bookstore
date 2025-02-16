@@ -11,8 +11,8 @@
 		}
 	}
 
-	if (!function_exists("select4LatestBook")){
-		function select4LatestBook($conn){
+	if (!function_exists("selectLatestBook")){
+		function selectLatestBook($conn){
 			$row = array();
 			$query = "SELECT book_title, book_author, book_price, book_isbn, book_image  FROM books ORDER BY book_isbn DESC";
 			$result = mysqli_query($conn, $query);
@@ -20,7 +20,7 @@
 				echo "Can't retrieve data " . mysqli_error($conn);
 				exit;
 			}
-			for($i = 0; $i < 6; $i++){
+			for($i = 0; $i < 8; $i++){
 				array_push($row, mysqli_fetch_assoc($result));
 			}
 			return $row;

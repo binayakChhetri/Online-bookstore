@@ -1,6 +1,5 @@
 <?php
-    if(!isset($_SESSION)) 
-    { 
+    if(!isset($_SESSION)) { 
         session_start(); 
     } 
     require_once "./functions/database_functions.php";
@@ -16,19 +15,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title><?php echo $title; ?></title>
-    
-
-  
-
     <style>
-      <?php include './CSS/style.css';?>
+      <?php include './CSS/header.css';?>
     </style>
   </head>
 
   <body>
-
     <nav class="navbar"  >
       <div class="container">
         <div class="navbar-header" >
@@ -127,4 +120,4 @@
       } 
     ?>
 
-    <div class="books" id="main"> 
+    
