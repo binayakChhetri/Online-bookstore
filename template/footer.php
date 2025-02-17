@@ -2,7 +2,7 @@
 	  <?php include './CSS/footer.css';?>
 </style>
 <footer>
-	<div class="container">
+	<div class="footer-container">
 		<div class="row">
 			<div >
 				<p>Information</p>
@@ -14,8 +14,17 @@
 			<div >
 				<p>My Account</p>
 				<ul>
-					<li><a href="login.php">Login</a></li>
+					<li><a href="signin.php">Signin</a></li>
 					<li><a href="signup.php">Signup</a></li>
+				</ul>
+			</div>
+			<div >
+				<p>Quick links</p>
+				<ul>
+					<li><a href="cart.php">My Cart</a></li>
+					<li><a href="books.php">Books</a></li>
+					<li><a href="category_list.php">Categories</a></li>
+					<li><a href="publisher_list.php">Publishers</a></li>
 				</ul>
 			</div>
 			<div>

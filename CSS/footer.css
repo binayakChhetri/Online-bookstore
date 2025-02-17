@@ -6,7 +6,7 @@ footer {
   padding-bottom: 1rem;
 }
 
-footer > .container {
+footer > .footer-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,32 +15,32 @@ footer > .container {
   padding: 1rem 0;
 }
 
-.container > .row {
+footer .footer-container > .row {
   width: 100%;
   display: flex;
   gap: 3rem;
 }
 
-.row p {
+footer .row p {
   font-size: 0.9rem;
   color: #8a2be2;
   margin-bottom: 0.8rem;
 }
 
-.container ul {
+footer .footer-container ul {
   list-style: none;
 }
 
-.container a {
+footer .footer-container a {
   text-decoration: none;
   color: #333;
 }
 
-.container a:hover {
+footer .footer-container a:hover {
   color: #8a2be2;
 }
 
-footer .container ul li,
+footer .footer-container ul li,
 footer span {
   display: block;
   margin-bottom: 0.2rem;

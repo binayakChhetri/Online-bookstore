@@ -40,7 +40,7 @@
 			?>
 			<li >
 				<a href="bookPerPub.php?pubid=<?php echo $row['publisherid']; ?>"><?php echo $row['publisher_name']; ?></a>
-				<p class="badge"><?php echo $count; ?>  📗</p>
+				<p class="badge"><?php echo $count; ?>  📘</p>
 			</li>
 		<?php } ?>
 			<li>
