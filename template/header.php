@@ -32,10 +32,8 @@
             </form>
         </div>
 
-        <!--/.navbar-collapse -->
         <div id="navbar" >
           <ul class="nav navbar-nav navbar-right">
-              <!-- link to publiser_list.php -->
               <li>
                 <a href="publisher_list.php">
                   Publishers
@@ -44,10 +42,8 @@
               
               <li><a href="category_list.php">Categories</a></li>
               
-              <!-- link to books.php -->
               <li><a href="books.php">Books</a></li>
               
-              <!-- link to shopping cart -->
               <li><a href="cart.php">My Cart</a></li>
               <?php 
                if(isset($_SESSION['user'])){
