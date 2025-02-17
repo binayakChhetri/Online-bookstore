@@ -1,3 +1,6 @@
+<style>
+	<?php include './CSS/category_list.css';?>
+</style>
 <?php
 	session_start();
 	require_once "./functions/database_functions.php";
@@ -17,32 +20,34 @@
 	$title = "List Of Categories";
 	require "./template/header.php";
 ?>
-	<p class="lead">List of Category</p>
-	<ul>
-	<?php 
-		while($row = mysqli_fetch_assoc($result)){
-			$count = 0; 
-			$query = "SELECT categoryid FROM books";
-			$result2 = mysqli_query($conn, $query);
-			if(!$result2){
-				echo "Can't retrieve data " . mysqli_error($conn);
-				exit;
-			}
-			while ($pubInBook = mysqli_fetch_assoc($result2)){
-				if($pubInBook['categoryid'] == $row['categoryid']){
-					$count++;
+	<div class="category-section">	
+		<h2>List of Category</h2>
+		<ul>
+		<?php 
+			while($row = mysqli_fetch_assoc($result)){
+				$count = 0; 
+				$query = "SELECT categoryid FROM books";
+				$result2 = mysqli_query($conn, $query);
+				if(!$result2){
+					echo "Can't retrieve data " . mysqli_error($conn);
+					exit;
 				}
-			}
-	?>
-		<li>
-			<span class="badge"><?php echo $count; ?></span>
-		    <a href="bookPerCat.php?catid=<?php echo $row['categoryid']; ?>"><?php echo $row['category_name']; ?></a>
-		</li>
-	<?php } ?>
-		<li>
-			<a href="books.php">List full of books</a>
-		</li>
-	</ul>
+				while ($pubInBook = mysqli_fetch_assoc($result2)){
+					if($pubInBook['categoryid'] == $row['categoryid']){
+						$count++;
+					}
+				}
+		?>
+			<li>
+				<span class="no-of-book"><?php echo $count; ?> 📗 </span>
+				<a href="bookPerCat.php?catid=<?php echo $row['categoryid']; ?>"><?php echo $row['category_name']; ?></a>
+			</li>
+		<?php } ?>
+			<li>
+				<a href="books.php">List full of books</a>
+			</li>
+		</ul>
+	</div>
 <?php
 	mysqli_close($conn);
 	require "./template/footer.php";

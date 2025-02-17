@@ -21,7 +21,7 @@
       <?php include './CSS/publisher_list.css';?>
     </style>
    <div class="publisher-section">
-		<h2 >List of Publisher</h2>
+		<h2>LIST OF PUBLISHERS</h2>
 		<ul>
 			<?php 
 				while($row = mysqli_fetch_assoc($result)){
@@ -39,8 +39,8 @@
 					}
 			?>
 			<li >
+				<span class="no-of-book"><?php echo $count; ?>  📗 </span>
 				<a href="bookPerPub.php?pubid=<?php echo $row['publisherid']; ?>"><?php echo $row['publisher_name']; ?></a>
-				<p class="badge"><?php echo $count; ?>  📘</p>
 			</li>
 		<?php } ?>
 			<li>
