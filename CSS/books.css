@@ -1,0 +1,169 @@
+.books-form {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 25px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 0px 2px rgba(0, 0, 0, 0.203);
+}
+
+.books-form .header {
+  margin-bottom: 25px;
+}
+
+.books-form h2 {
+  color: #2c3e50;
+  margin-bottom: 12px;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.books-form h5 {
+  color: #666;
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.books-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sort-options {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 10px;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+}
+
+.radio input[type="radio"] {
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.radio label {
+  color: #4a5568;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.button-group {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.button-group button {
+  padding: 10px 20px;
+  background-color: #8a2be2;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 500;
+  min-width: 100px;
+}
+
+.button-group button:hover {
+  background-color: #892be29d;
+  transform: translateY(-1px);
+}
+
+.books-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.book-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.book-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.book-card img {
+  max-width: 180px;
+  height: auto;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.book-details {
+  width: 100%;
+  text-align: center;
+}
+
+.book-details h3 {
+  color: #2c3e50;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 10px 0;
+  line-height: 1.4;
+}
+
+.book-details .author {
+  color: #666;
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+.book-details .price {
+  color: #8a2be2;
+  font-weight: 600;
+  font-size: 16px;
+  margin: 8px 0;
+}
+
+@media (max-width: 768px) {
+  .books-container {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 0 15px;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .button-group button {
+    width: 100%;
+  }
+
+  .books-form {
+    padding: 20px;
+    margin: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sort-options {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .book-card img {
+    max-width: 150px;
+  }
+}

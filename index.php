@@ -26,8 +26,7 @@
     </div>
 </div>
 <?php
-
-if(isset($conn)) {mysqli_close($conn);}
-  require_once "./template/footer.php";
+  if(isset($conn)) {mysqli_close($conn);}
+    require_once "./template/footer.php";
 ?>
 
