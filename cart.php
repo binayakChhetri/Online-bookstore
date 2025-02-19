@@ -163,10 +163,7 @@ require "./template/header.php";
                   <tr>
                     <td>
                       <div class="item-display">
-                        <a href="book.php?bookisbn=<?php echo $query_row['book_isbn']; ?>">
-                          <img src="./bootstrap/img/<?php echo $query_row['book_image']; ?>"
-                            alt="<?php echo $query_row['book_title']; ?>" class="item-image">
-                        </a>
+
                         <div class="item-details">
                           <h3><?php echo $query_row['book_title']; ?></h3>
                           <p>by <?php echo $query_row['book_author']; ?></p>

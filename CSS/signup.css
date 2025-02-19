@@ -1,3 +1,11 @@
+.signup-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 95vh;
+  background: linear-gradient(to right, #e6e6fa, #d8bfd8);
+}
+
 .signup-container {
   max-width: 700px;
   width: 100%;
@@ -5,6 +13,8 @@
   padding: 25px 30px;
   border-radius: 5px;
   margin: 0 auto;
+
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 .signup-container .title {
   text-transform: uppercase;
@@ -52,10 +62,6 @@ form .input-box span.details {
   border-color: #9b59b6;
 }
 
-.signup-container form .gender-details .gender-title {
-  font-size: 20px;
-  font-weight: 500;
-}
 .signup-container form .category {
   display: flex;
   width: 80%;
@@ -83,9 +89,7 @@ form .input-box span.details {
   background: #9b59b6;
   border-color: #d9d9d9;
 }
-.signup-container form input[type="radio"] {
-  display: none;
-}
+
 .signup-container form .button {
   height: 45px;
   margin: 35px 0;

@@ -3,6 +3,11 @@ $title = "User SignIn";
 require_once "./template/header.php";
 ?>
 
+<style>
+  <?php include './CSS/signin.css'; ?>
+</style>
+
+
 <?php
 if (isset($_GET['signup']) && $_GET['signup'] === 'success') {
   echo "<div style='background-color: #; color: #155724; padding: 10px; border-radius: 5px; text-align: center;'>
@@ -18,20 +23,23 @@ if (isset($_GET['signup']) && $_GET['signup'] === 'success') {
 }
 
 ?>
-<form class="form-horizontal" method="post" action="user_verify.php">
-  <div class="form-group">
-    <label for="exampleInputEmail1">Username</label>
-    <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter username" name="username">
-    <small class="form-text text-muted">We'll never share your email with anyone else.</small>
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Password</label>
-    <input type="password" class="form-control" placeholder="Password" name="password">
-  </div>
+<div class="form-container">
+  <form class="signin-form" method="post" action="user_verify.php">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email</label>
+      <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter username" name="username"
+        required>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" placeholder="Password" name="password" required>
+    </div>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+    <button type="submit" class="signin-btn">Submit</button>
 
+  </form>
+
+</div>
 
 <div style="position:fixed; bottom:400px">
   <?php
