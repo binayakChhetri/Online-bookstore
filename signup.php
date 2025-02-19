@@ -70,22 +70,6 @@ if (isset($_GET["error"]) && $_GET["error"] === "email_exists") {
     </form>
   </div>
 </div>
-
-
-
-<?php
-$fullurl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-if (strpos($fullurl, "signup=empty") == true) {
-  echo '<P style="color:red">You did not fill in all the fields.</P>';
-  exit();
-}
-if (strpos($fullurl, "signup=invalidemail") == true) {
-  echo '<P style="color:red">You did not enter a valid email address.</P>';
-  exit();
-}
-?>
-
-
 </div>
 
 
