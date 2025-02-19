@@ -1,24 +1,24 @@
 <style>
-	  <?php include './CSS/footer.css';?>
+	<?php include './CSS/footer.css'; ?>
 </style>
 <footer>
 	<div class="footer-container">
 		<div class="row">
-			<div >
+			<div>
 				<p>Information</p>
 				<ul>
 					<li><a href="about.php">About Us</a></li>
 					<li><a href="contact.php">Contact Us</a></li>
 				</ul>
 			</div>
-			<div >
+			<div>
 				<p>My Account</p>
 				<ul>
 					<li><a href="signin.php">Signin</a></li>
 					<li><a href="signup.php">Signup</a></li>
 				</ul>
 			</div>
-			<div >
+			<div>
 				<p>Quick links</p>
 				<ul>
 					<li><a href="cart.php">My Cart</a></li>
@@ -35,6 +35,6 @@
 		</div>
 	</div>
 	<p style="text-align:center">© 2025 RL Bookstore</p>
-	
-	
+
+
 </footer>

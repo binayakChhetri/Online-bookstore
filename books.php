@@ -3,35 +3,35 @@
 </style>
 
 <?php
-  session_start();
-  require_once "./functions/database_functions.php";
-  $conn = db_connect();
+session_start();
+require_once "./functions/database_functions.php";
+$conn = db_connect();
 
-  $query = "SELECT * FROM books";
-  if(isset($_POST['title']) || isset($_POST['price']) || isset($_POST['author'])) {
-    $orderBy = '';
-    $direction = 'asc'; 
-    
-    if(isset($_POST['desc'])) {
-      $direction = 'desc';
-    }
-    
-    if(isset($_POST['title'])) {
-      $orderBy = 'book_title';
-    } elseif(isset($_POST['price'])) {
-      $orderBy = 'book_price';
-    } elseif(isset($_POST['author'])) {
-      $orderBy = 'book_author';
-    }
-    
-    if($orderBy) {
-      $query .= " ORDER BY $orderBy $direction";
-    }
+$query = "SELECT * FROM books";
+if (isset($_POST['title']) || isset($_POST['price']) || isset($_POST['author'])) {
+  $orderBy = '';
+  $direction = 'asc';
+
+  if (isset($_POST['desc'])) {
+    $direction = 'desc';
   }
 
-  $result = mysqli_query($conn, $query);
-  $title = "Full Catalogs of Books";
-  require_once "./template/header.php";
+  if (isset($_POST['title'])) {
+    $orderBy = 'book_title';
+  } elseif (isset($_POST['price'])) {
+    $orderBy = 'book_price';
+  } elseif (isset($_POST['author'])) {
+    $orderBy = 'book_author';
+  }
+
+  if ($orderBy) {
+    $query .= " ORDER BY $orderBy $direction";
+  }
+}
+
+$result = mysqli_query($conn, $query);
+$title = "Full Catalogs of Books";
+require_once "./template/header.php";
 ?>
 
 <div class="books-form">
@@ -65,7 +65,7 @@
 </div>
 
 <div class="books-container">
-  <?php while($book = mysqli_fetch_assoc($result)) { ?>
+  <?php while ($book = mysqli_fetch_assoc($result)) { ?>
     <div class="book-card">
       <a href="book.php?bookisbn=<?php echo $book['book_isbn']; ?>">
         <img src="./images/img/<?php echo $book['book_image']; ?>" alt="<?php echo $book['book_title']; ?>">
@@ -80,8 +80,8 @@
 </div>
 
 <?php
-  if(isset($conn)) { 
-    mysqli_close($conn); 
-  }
-  require_once "./template/footer.php";
+if (isset($conn)) {
+  mysqli_close($conn);
+}
+require_once "./template/footer.php";
 ?>

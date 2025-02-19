@@ -2,10 +2,27 @@
 $title = "User SignUp";
 require_once "./template/header.php";
 ?>
+
 <style>
   <?php include './CSS/signup.css'; ?>
 </style>
 
+
+<?php
+if (isset($_GET["error"]) && $_GET["error"] === "email_exists") {
+  echo "<div style='background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; text-align: center;'>
+  Email already exists. Please use another email.
+</div>";
+
+  echo "
+<script>
+  setTimeout(function () {
+    window.history.replaceState(null, '', window.location.pathname);
+  }, 3000);
+</script>";
+
+}
+?>
 <div class="signup-container">
   <h2 class="title">Registration</h2>
   <div class="content">
@@ -70,9 +87,7 @@ if (strpos($fullurl, "signup=invalidemail") == true) {
 
 
 </div>
-<?php
-require_once "./template/footer.php";
-?>
+
 
 <script>
   function validateForm() {
@@ -99,10 +114,6 @@ require_once "./template/footer.php";
     emailError.innerText = "";
     pwdError.innerText = "";
     zipcodeError.innerText = "";
-
-
-
-    console.log(firstname, lastname, email, password.length, address, city, zipcode);
 
     if (!/^[a-zA-Z]+$/.test(firstname)) {
       fnameError.innerText = "Only letters are allowed";

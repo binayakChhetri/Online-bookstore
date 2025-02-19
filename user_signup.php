@@ -1,7 +1,7 @@
 <?php
 session_start();
 $title = "User Signup";
-require "./template/header.php";
+// require "./template/header.php";
 require "./functions/database_functions.php";
 $conn = db_connect();
 
@@ -14,47 +14,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$city = trim($_POST['city']);
 	$zipcode = trim($_POST['zipcode']);
 
-	echo "$firstname $lastname $email $password $address $city $zipcode";
-}
-/* 
+	if (empty($firstname) || empty($lastname) || empty($email) || empty($password) || empty($address) || empty($city) || empty($zipcode)) {
+		header("Location: ../onlinebookstore/signup.php?error=empty_fields");
+		exit();
+	}
 
-$firstname = mysqli_real_escape_string($conn, $firstname);
-
-$lastname = mysqli_real_escape_string($conn, $lastname);
-
-$email = mysqli_real_escape_string($conn, $email);
-
-$password = mysqli_real_escape_string($conn, $password);
-
-$address = mysqli_real_escape_string($conn, $address);
-
-$city = mysqli_real_escape_string($conn, $city);
-
-$zipcode = mysqli_real_escape_string($conn, $zipcode);
-
-if (empty($firstname) || empty($lastname) || empty($email) || empty($password) || empty($address) || empty($city) || empty($zipcode)) {
-	header("Location:../onlinebookstore/signup.php?signup=empty");
-} else {
 	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-		header("Location:../onlinebookstore/signup.php?signup=invalidemail");
+		header("Location: ../onlinebookstore/signup.php?error=invalid_email");
+		exit();
+	}
+
+	// Check if email already exists using a prepared statement
+	$findUser = "SELECT * FROM customers WHERE email = ?";
+	echo $findUser;
+
+	$stmt = mysqli_prepare($conn, $findUser);
+	mysqli_stmt_bind_param($stmt, "s", $email);
+	mysqli_stmt_execute($stmt);
+	mysqli_stmt_store_result($stmt);
+
+
+	if (mysqli_stmt_num_rows($stmt) > 0) {
+		header("Location: signup.php?error=email_exists");
+		exit();
+	}
+	mysqli_stmt_close($stmt);
+
+
+	$insertUser = "INSERT INTO customers (firstname, lastname, email, address, password, city, zipcode) VALUES (?, ?, ?, ?, ?, ?, ?)";
+	$stmt = mysqli_prepare($conn, $insertUser);
+	mysqli_stmt_bind_param($stmt, "sssssss", $firstname, $lastname, $email, $address, $password, $city, $zipcode);
+
+	if (mysqli_stmt_execute($stmt)) {
+		mysqli_stmt_close($stmt);
+		header("Location: signin.php?signup=success");
+		exit();
 	} else {
-		$findUser = "SELECT * FROM customers WHERE email = '$email'";
-		$findResult = mysqli_query($conn, $findUser);
-		if (mysqli_num_rows($findResult) == 0) {
-			$insertUser = "INSERT INTO customers(firstname,lastname,email,address,password,city,zipcode) VALUES 
-						('$firstname','$lastname','$email','$address','$password','$city','$zipcode')";
-			$insertResult = mysqli_query($conn, $insertUser);
-			if (!$insertResult) {
-				echo "Can't add new user " . mysqli_error($conn);
-				exit;
-			}
-			$userid = mysqli_insert_id($conn);
-			header("Location: signin.php");
-		} else {
-			$row = mysqli_fetch_assoc($findResult);
-			$userid = $row['id'];
-			header("Location: signin.php");
-		}
+		mysqli_stmt_close($stmt);
+		header("Location: ../onlinebookstore/signup.php?error=signup_failed");
+		exit();
 	}
 }
 ?>
@@ -63,5 +61,4 @@ if (empty($firstname) || empty($lastname) || empty($email) || empty($password) |
 if (isset($conn)) {
 	mysqli_close($conn);
 }
-require_once "./template/footer.php";
 ?> */

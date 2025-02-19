@@ -3,6 +3,21 @@ $title = "User SignIn";
 require_once "./template/header.php";
 ?>
 
+<?php
+if (isset($_GET['signup']) && $_GET['signup'] === 'success') {
+  echo "<div style='background-color: #; color: #155724; padding: 10px; border-radius: 5px; text-align: center;'>
+            Signup successful! You can now log in.
+          </div>";
+
+
+  echo "<script>
+          setTimeout(function() {
+              window.history.replaceState(null, '', window.location.pathname);
+          }, 3000);
+        </script>";
+}
+
+?>
 <form class="form-horizontal" method="post" action="user_verify.php">
   <div class="form-group">
     <label for="exampleInputEmail1">Username</label>
@@ -16,6 +31,8 @@ require_once "./template/header.php";
 
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+
 <div style="position:fixed; bottom:400px">
   <?php
   $fullurl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -33,6 +50,3 @@ require_once "./template/header.php";
   }
   ?>
 </div>
-<?php
-require_once "./template/footer.php";
-?>
