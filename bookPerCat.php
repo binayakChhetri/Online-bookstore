@@ -1,3 +1,7 @@
+<style>
+	<?php include './CSS/booksPerCat.css'; ?>
+</style>
+
 <?php
 session_start();
 require_once "./functions/database_functions.php";
@@ -8,6 +12,7 @@ if (isset($_GET['catid'])) {
 	echo "Wrong query! Check again!";
 	exit;
 }
+
 
 // connect database
 $conn = db_connect();
@@ -27,21 +32,26 @@ if (mysqli_num_rows($result) == 0) {
 $title = "Books Per Category";
 require "./template/header.php";
 ?>
-<p class="lead"><a href="category_list.php">Categories</a> > <?php echo $catName; ?></p>
-<?php while ($row = mysqli_fetch_assoc($result)) {
-	?>
-	<div class="row">
-		<div class="col-md-3">
-			<img class="img-responsive img-thumbnail" src="./bootstrap/img/<?php echo $row['book_image']; ?>">
+
+<div class="book-per-cat">
+	<h2 class="title"><a href="category_list.php">Categories</a> > <?php echo $catName; ?></h2>
+	<?php while ($row = mysqli_fetch_assoc($result)) {
+		?>
+		<div class="book-detail">
+			<div class="img-container">
+				<img class="img-responsive img-thumbnail" src="./images/img/<?php echo $row['book_image']; ?>">
+			</div>
+			<div class="book-info">
+				<h4><?php echo $row['book_title']; ?></h4>
+				<a href="book.php?bookisbn=<?php echo $row['book_isbn']; ?>" class="btn btn-primary">Get Details</a>
+			</div>
 		</div>
-		<div class="col-md-7">
-			<h4><?php echo $row['book_title']; ?></h4>
-			<a href="book.php?bookisbn=<?php echo $row['book_isbn']; ?>" class="btn btn-primary">Get Details</a>
-		</div>
-	</div>
-	<br>
-	<?php
-}
+		<br>
+		<?php
+	} ?>
+</div>
+
+<?php
 if (isset($conn)) {
 	mysqli_close($conn);
 }
