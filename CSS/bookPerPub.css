@@ -1,0 +1,81 @@
+.book-per-pub {
+  max-width: 500px;
+  width: 80%;
+  margin: 0em auto;
+}
+
+.book-per-pub .title {
+  text-transform: uppercase;
+  border-bottom: 3px solid #333;
+  width: fit-content;
+  letter-spacing: 1px;
+  padding-bottom: 10px;
+  color: #333;
+  margin-top: 2.5rem;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.book-per-pub .title a {
+  color: #333;
+  text-decoration: none;
+}
+
+.book-per-pub .title a:hover {
+  text-decoration: underline;
+}
+
+.book-detail {
+  display: flex;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.book-detail:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.img-container {
+  flex: 0 0 150px;
+  margin-right: 20px;
+}
+
+.img-container img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  border: 2px solid #8a6ddc;
+}
+
+.book-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.book-info h4 {
+  margin: 0 0 10px;
+  color: #8a6ddc;
+}
+
+.btn-primary {
+  background-color: #8a6ddc;
+  border: 1px solid #8a6ddc;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #7567c7;
+  border-color: #7567c7;
+}
