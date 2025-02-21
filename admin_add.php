@@ -1,10 +1,12 @@
+<style>
+	<?php include "./css/admin_add.css" ?>
+</style>
 <?php
 session_start();
 if ((!isset($_SESSION['manager']) && !isset($_SESSION['expert']))) {
 	header("Location:index.php");
 }
 $title = "Add new book";
-// require "./template/header.php";
 require "./functions/database_functions.php";
 $conn = db_connect();
 
@@ -29,7 +31,6 @@ if (isset($_POST['add'])) {
 	$isbn = trim($_POST['isbn']);
 	$isbn = mysqli_real_escape_string($conn, $isbn);
 
-	// Check if the book already exists
 	$sameBook = "SELECT * FROM books WHERE book_isbn = '$isbn'";
 	$sameResult = mysqli_query($conn, $sameBook);
 
@@ -38,7 +39,6 @@ if (isset($_POST['add'])) {
 		exit();
 	}
 
-	// Process form submission here (only once)
 	$title = trim($_POST['title']);
 	$title = mysqli_real_escape_string($conn, $title);
 
@@ -58,7 +58,6 @@ if (isset($_POST['add'])) {
 	$category = mysqli_real_escape_string($conn, $category);
 
 	echo $_SERVER['DOCUMENT_ROOT'];
-	// Handle Image Upload
 	$image = "";
 	if (isset($_FILES['image']) && $_FILES['image']['name'] != "") {
 		$image = $_FILES['image']['name'];
@@ -75,7 +74,6 @@ if (isset($_POST['add'])) {
 		}
 	}
 
-	// Insert Publisher
 	$findPub = "SELECT * FROM publisher WHERE publisher_name = '$publisher'";
 	$findResult = mysqli_query($conn, $findPub);
 	if (mysqli_num_rows($findResult) == 0) {
@@ -86,7 +84,6 @@ if (isset($_POST['add'])) {
 		$publisherid = $row['publisherid'];
 	}
 
-	// Insert Category
 	$findCat = "SELECT * FROM category WHERE category_name = '$category'";
 	$findResult = mysqli_query($conn, $findCat);
 	if (mysqli_num_rows($findResult) == 0) {
@@ -97,14 +94,12 @@ if (isset($_POST['add'])) {
 		$categoryid = $row['categoryid'];
 	}
 
-	// Insert Book
 	$query = "INSERT INTO books (book_isbn, book_title, book_author, book_image, book_descr, book_price, publisherid, categoryid) 
               VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 	$stmt = $conn->prepare($query);
 	$stmt->bind_param("sssssdii", $isbn, $title, $author, $image, $descr, $price, $publisherid, $categoryid);
 
 	if ($stmt->execute()) {
-		// Redirect after successful submission to prevent duplicate inserts
 		header("Location: admin_book.php");
 		exit();
 	} else {
@@ -150,7 +145,8 @@ if (isset($_POST['add'])) {
 		</tr>
 	</table>
 	<input type="submit" name="add" value="Add new book" class="btn btn-primary">
-	<input type="reset" value="cancel" class="btn btn-default">
+	<input type="reset" value="Cancel" class="btn btn-default">
+	<a style="margin-left: 500px; text-decoration: none;" href="./admin_book.php">Back</a>
 </form>
 
 
