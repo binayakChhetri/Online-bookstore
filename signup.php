@@ -75,7 +75,6 @@ if (isset($_GET["error"]) && $_GET["error"] === "email_exists") {
 </div>
 </div>
 
-
 <script>
   function validateForm() {
     let isValid = true;
@@ -106,19 +105,41 @@ if (isset($_GET["error"]) && $_GET["error"] === "email_exists") {
       fnameError.innerText = "Only letters are allowed";
       isValid = false;
     }
-
     if (!/^[a-zA-Z]+$/.test(lastname)) {
       lnameError.innerText = "Only letters are allowed";
       isValid = false;
     }
+
     if (!/^\S+@\S+\.\S+$/.test(email)) {
       emailError.innerText = "Invalid email format";
       isValid = false;
     }
+
     if (password.length < 8) {
       pwdError.innerText = "Password must be at least 8 characters";
       isValid = false;
     }
+
+    if (!/(?=.*[A-Z])/.test(password)) {
+      pwdError.innerText = "Password must contain at least one uppercase letter";
+      isValid = false;
+    }
+
+    if (!/(?=.*[a-z])/.test(password)) {
+      pwdError.innerText = "Password must contain at least one lowercase letter";
+      isValid = false;
+    }
+
+    if (!/(?=.*\d)/.test(password)) {
+      pwdError.innerText = "Password must contain at least one number";
+      isValid = false;
+    }
+
+    if (!/(?=.*[@$!%*?&])/.test(password)) {
+      pwdError.innerText = "Password must contain at least one special character";
+      isValid = false;
+    }
+
     if (zipcode.length !== 5) {
       zipcodeError.innerText = "Zipcode must be 5 digits";
       isValid = false;

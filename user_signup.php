@@ -1,7 +1,6 @@
 <?php
 session_start();
 $title = "User Signup";
-// require "./template/header.php";
 require "./functions/database_functions.php";
 $conn = db_connect();
 
@@ -24,7 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		exit();
 	}
 
-	// Check if email already exists using a prepared statement
 	$findUser = "SELECT * FROM customers WHERE email = ?";
 	echo $findUser;
 
@@ -33,13 +31,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	mysqli_stmt_execute($stmt);
 	mysqli_stmt_store_result($stmt);
 
-
 	if (mysqli_stmt_num_rows($stmt) > 0) {
 		header("Location: signup.php?error=email_exists");
 		exit();
 	}
 	mysqli_stmt_close($stmt);
-
 
 	$insertUser = "INSERT INTO customers (firstname, lastname, email, address, password, city, zipcode) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	$stmt = mysqli_prepare($conn, $insertUser);
@@ -61,4 +57,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if (isset($conn)) {
 	mysqli_close($conn);
 }
-?> */
+?>
