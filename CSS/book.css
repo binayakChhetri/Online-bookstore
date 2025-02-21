@@ -1,0 +1,107 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+}
+
+.book-container {
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 20px;
+  box-shadow: 0 0px 2px rgba(0, 0, 0, 0.238);
+}
+
+.lead {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.lead a {
+  color: #8a6ddc;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.lead a:hover {
+  color: #8a6ddc;
+  text-decoration: underline;
+}
+
+.img-thumbnail {
+  max-width: 100%;
+  height: auto;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.img-thumbnail:hover {
+  transform: scale(1.02);
+}
+
+.col-md-6 h4 {
+  width: 400px;
+  color: #333;
+  margin: 1.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #8a6ddc;
+}
+
+.col-md-6 p {
+  width: 60%;
+  line-height: 1.6;
+  color: #444;
+  margin-bottom: 1.5rem;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 2rem;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.table tr {
+  border-bottom: 1px solid #eee;
+}
+
+.table tr:last-child {
+  border-bottom: none;
+}
+
+.table td {
+  padding: 12px 8px;
+}
+
+.table td:first-child {
+  font-weight: 600;
+  color: #333;
+  width: 30%;
+}
+
+.table td:last-child {
+  color: #666;
+}
+
+/* Add to cart button styling */
+.btn-add-to-cart {
+  background-color: #8a6ddc;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-add-to-cart:hover {
+  background-color: #8b6ddcc5;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 2px #7c64bc;
+}
