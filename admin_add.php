@@ -61,15 +61,39 @@ if (isset($_POST['add'])) {
 	$category = mysqli_real_escape_string($conn, $category);
 
 
-
-	// add image
 	if (isset($_FILES['image']) && $_FILES['image']['name'] != "") {
 		$image = $_FILES['image']['name'];
+		$ext = pathinfo($image, PATHINFO_EXTENSION);
+
+		$uniqueName = time() . "_" . uniqid() . "." . $ext;
+
 		$directory_self = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
 		$uploadDirectory = $_SERVER['DOCUMENT_ROOT'] . $directory_self . "images/img/";
-		$uploadDirectory .= $image;
-		move_uploaded_file($_FILES['image']['tmp_name'], $uploadDirectory);
+
+
+		$uploadPath = $uploadDirectory . $uniqueName;
+
+		if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadPath)) {
+			echo "File uploaded successfully: " . $uniqueName;
+
+			$title = $_POST['title'];
+			$author = $_POST['author'];
+
+
+			$query = "INSERT INTO books (book_title, book_author, book_image) VALUES (?, ?, ?)";
+			$stmt = $conn->prepare($query);
+			$stmt->bind_param("sss", $title, $author, $uniqueName); // Store the unique file name
+			if ($stmt->execute()) {
+				echo "Data inserted successfully!";
+			} else {
+				echo "Error inserting data: " . $stmt->error;
+			}
+			$stmt->close();
+		} else {
+			echo "File upload failed.";
+		}
 	}
+
 
 
 	$findPub = "SELECT * FROM publisher WHERE publisher_name = '$publisher'";
