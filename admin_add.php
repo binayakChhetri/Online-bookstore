@@ -4,9 +4,39 @@ if ((!isset($_SESSION['manager']) && !isset($_SESSION['expert']))) {
 	header("Location:index.php");
 }
 $title = "Add new book";
-require "./template/header.php";
+// require "./template/header.php";
 require "./functions/database_functions.php";
 $conn = db_connect();
+
+
+if (isset($_GET["isbn"]) && $_GET["isbn"] === "already_exists") {
+	echo "<div style='background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; text-align: center;'>
+			ISBN is already exist. Please use another ISBN.
+		  </div>";
+
+	echo "
+<script>
+  setTimeout(function () {
+    window.history.replaceState(null, '', window.location.pathname);
+  }, 3000);
+</script>";
+
+}
+?>
+
+<?php
+// Handle if ISBN already exists
+if (isset(($_POST['add']))) {
+	$isbn = trim($_POST['isbn']);
+
+	$sameBook = "SELECT * FROM books WHERE book_isbn = '$isbn'";
+	$sameResult = mysqli_query($conn, $sameBook);
+
+	if (mysqli_num_rows($sameResult) > 0) {
+		header("Location: admin_add.php?isbn=already_exists");
+		exit();
+	}
+}
 
 if (isset($_POST['add'])) {
 	$isbn = trim($_POST['isbn']);
@@ -30,17 +60,18 @@ if (isset($_POST['add'])) {
 	$category = trim($_POST['category']);
 	$category = mysqli_real_escape_string($conn, $category);
 
+
+
 	// add image
 	if (isset($_FILES['image']) && $_FILES['image']['name'] != "") {
 		$image = $_FILES['image']['name'];
 		$directory_self = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
-		$uploadDirectory = $_SERVER['DOCUMENT_ROOT'] . $directory_self . "bootstrap/img/";
+		$uploadDirectory = $_SERVER['DOCUMENT_ROOT'] . $directory_self . "images/img/";
 		$uploadDirectory .= $image;
 		move_uploaded_file($_FILES['image']['tmp_name'], $uploadDirectory);
 	}
 
-	// find publisher and return pubid
-	// if publisher is not in db, create new
+
 	$findPub = "SELECT * FROM publisher WHERE publisher_name = '$publisher'";
 	$findResult = mysqli_query($conn, $findPub);
 	if (mysqli_num_rows($findResult) == 0) {
@@ -56,8 +87,7 @@ if (isset($_POST['add'])) {
 		$row = mysqli_fetch_assoc($findResult);
 		$publisherid = $row['publisherid'];
 	}
-	// find category and return catid
-	// if category is not in db, create new
+
 	$findCat = "SELECT * FROM category WHERE category_name = '$category'";
 	$findResult = mysqli_query($conn, $findCat);
 	if (mysqli_num_rows($findResult) == 0) {
@@ -70,18 +100,22 @@ if (isset($_POST['add'])) {
 		}
 		$categoryid = mysqli_insert_id($conn);
 	} else {
+
 		$row = mysqli_fetch_assoc($findResult);
-		$category = $row['category'];
+		var_dump($row);
+		$categoryid = $row['categoryid'];
 	}
 
 
-	$query = "INSERT INTO books VALUES ('" . $isbn . "', '" . $title . "', '" . $author . "', '" . $image . "', '" . $descr . "', '" . $price . "', '" . $publisherid . "', '" . $categoryid . "')";
+	$query = "INSERT INTO books VALUES ('" . $isbn . "', '" . $title . "', '" . $author . "', '" . $image . "', '" . $descr
+		. "', '" . $price . "', '" . $publisherid . "', '" . $categoryid . "')";
 	$result = mysqli_query($conn, $query);
 	if (!$result) {
 		echo "Can't add new data " . mysqli_error($conn);
-		exit;
+		exit();
 	} else {
 		header("Location: admin_book.php");
+		exit();
 	}
 }
 ?>
@@ -129,5 +163,4 @@ if (isset($_POST['add'])) {
 if (isset($conn)) {
 	mysqli_close($conn);
 }
-require_once "./template/footer.php";
 ?>

@@ -4,7 +4,6 @@ if ((!isset($_SESSION['manager']) && !isset($_SESSION['expert']))) {
 	header("Location:index.php");
 }
 $title = "Add new publisher";
-require "./template/header.php";
 require "./functions/database_functions.php";
 $conn = db_connect();
 
@@ -45,5 +44,4 @@ if (isset($_POST['add'])) {
 if (isset($conn)) {
 	mysqli_close($conn);
 }
-require_once "./template/footer.php";
 ?>

@@ -4,7 +4,6 @@ if ((!isset($_SESSION['manager']) && !isset($_SESSION['expert']))) {
 	header("Location:index.php");
 }
 $title = "List category";
-require_once "./template/header.php";
 require_once "./functions/database_functions.php";
 $conn = db_connect();
 $result = getAllCategories($conn);
@@ -54,5 +53,4 @@ if (isset($_SESSION['manager']) && $_SESSION['manager'] == true) {
 if (isset($conn)) {
 	mysqli_close($conn);
 }
-require_once "./template/footer.php";
 ?>
