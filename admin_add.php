@@ -15,20 +15,21 @@ if (isset($_GET["isbn"]) && $_GET["isbn"] === "already_exists") {
 		  </div>";
 
 	echo "
-<script>
-  setTimeout(function () {
-    window.history.replaceState(null, '', window.location.pathname);
-  }, 3000);
-</script>";
+	<script>
+	setTimeout(function () {
+		window.history.replaceState(null, '', window.location.pathname);
+	}, 3000);
+	</script>";
 
 }
 ?>
 
 <?php
-// Handle if ISBN already exists
-if (isset(($_POST['add']))) {
+if (isset($_POST['add'])) {
 	$isbn = trim($_POST['isbn']);
+	$isbn = mysqli_real_escape_string($conn, $isbn);
 
+	// Check if the book already exists
 	$sameBook = "SELECT * FROM books WHERE book_isbn = '$isbn'";
 	$sameResult = mysqli_query($conn, $sameBook);
 
@@ -36,12 +37,8 @@ if (isset(($_POST['add']))) {
 		header("Location: admin_add.php?isbn=already_exists");
 		exit();
 	}
-}
 
-if (isset($_POST['add'])) {
-	$isbn = trim($_POST['isbn']);
-	$isbn = mysqli_real_escape_string($conn, $isbn);
-
+	// Process form submission here (only once)
 	$title = trim($_POST['title']);
 	$title = mysqli_real_escape_string($conn, $title);
 
@@ -60,94 +57,68 @@ if (isset($_POST['add'])) {
 	$category = trim($_POST['category']);
 	$category = mysqli_real_escape_string($conn, $category);
 
-
+	echo $_SERVER['DOCUMENT_ROOT'];
+	// Handle Image Upload
+	$image = "";
 	if (isset($_FILES['image']) && $_FILES['image']['name'] != "") {
 		$image = $_FILES['image']['name'];
 		$ext = pathinfo($image, PATHINFO_EXTENSION);
-
 		$uniqueName = time() . "_" . uniqid() . "." . $ext;
-
-		$directory_self = str_replace(basename($_SERVER['PHP_SELF']), '', $_SERVER['PHP_SELF']);
-		$uploadDirectory = $_SERVER['DOCUMENT_ROOT'] . $directory_self . "images/img/";
-
-
+		$uploadDirectory = $_SERVER['DOCUMENT_ROOT'] . "/book_store_system/images/img/";
 		$uploadPath = $uploadDirectory . $uniqueName;
 
 		if (move_uploaded_file($_FILES['image']['tmp_name'], $uploadPath)) {
-			echo "File uploaded successfully: " . $uniqueName;
-
-			$title = $_POST['title'];
-			$author = $_POST['author'];
-
-
-			$query = "INSERT INTO books (book_title, book_author, book_image) VALUES (?, ?, ?)";
-			$stmt = $conn->prepare($query);
-			$stmt->bind_param("sss", $title, $author, $uniqueName); // Store the unique file name
-			if ($stmt->execute()) {
-				echo "Data inserted successfully!";
-			} else {
-				echo "Error inserting data: " . $stmt->error;
-			}
-			$stmt->close();
+			$image = $uniqueName; // Store the unique file name
 		} else {
 			echo "File upload failed.";
+			exit();
 		}
 	}
 
-
-
+	// Insert Publisher
 	$findPub = "SELECT * FROM publisher WHERE publisher_name = '$publisher'";
 	$findResult = mysqli_query($conn, $findPub);
 	if (mysqli_num_rows($findResult) == 0) {
-		// insert into publisher table and return id
-		$insertPub = "INSERT INTO publisher(publisher_name) VALUES ('$publisher')";
-		$insertResult = mysqli_query($conn, $insertPub);
-		if (!$insertResult) {
-			echo "Can't add new publisher " . mysqli_error($conn);
-			exit;
-		}
+		mysqli_query($conn, "INSERT INTO publisher (publisher_name) VALUES ('$publisher')");
 		$publisherid = mysqli_insert_id($conn);
 	} else {
 		$row = mysqli_fetch_assoc($findResult);
 		$publisherid = $row['publisherid'];
 	}
 
+	// Insert Category
 	$findCat = "SELECT * FROM category WHERE category_name = '$category'";
 	$findResult = mysqli_query($conn, $findCat);
 	if (mysqli_num_rows($findResult) == 0) {
-		// insert into category table and return id
-		$insertCat = "INSERT INTO category(category_name) VALUES ('$category')";
-		$insertResult = mysqli_query($conn, $insertCat);
-		if (!$insertResult) {
-			echo "Can't add new category " . mysqli_error($conn);
-			exit;
-		}
+		mysqli_query($conn, "INSERT INTO category (category_name) VALUES ('$category')");
 		$categoryid = mysqli_insert_id($conn);
 	} else {
-
 		$row = mysqli_fetch_assoc($findResult);
-		var_dump($row);
 		$categoryid = $row['categoryid'];
 	}
 
+	// Insert Book
+	$query = "INSERT INTO books (book_isbn, book_title, book_author, book_image, book_descr, book_price, publisherid, categoryid) 
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	$stmt = $conn->prepare($query);
+	$stmt->bind_param("sssssdii", $isbn, $title, $author, $image, $descr, $price, $publisherid, $categoryid);
 
-	$query = "INSERT INTO books VALUES ('" . $isbn . "', '" . $title . "', '" . $author . "', '" . $image . "', '" . $descr
-		. "', '" . $price . "', '" . $publisherid . "', '" . $categoryid . "')";
-	$result = mysqli_query($conn, $query);
-	if (!$result) {
-		echo "Can't add new data " . mysqli_error($conn);
+	if ($stmt->execute()) {
+		// Redirect after successful submission to prevent duplicate inserts
+		header("Location: admin_book.php");
 		exit();
 	} else {
-		header("Location: admin_book.php");
+		echo "Error inserting data: " . $stmt->error;
 		exit();
 	}
 }
+
 ?>
-<form method="post" action="admin_add.php" enctype="multipart/form-data">
+<form class="admin-add-container" method="post" action="admin_add.php" enctype="multipart/form-data">
 	<table class="table">
 		<tr>
 			<th>ISBN</th>
-			<td><input type="text" name="isbn"></td>
+			<td><input type="number" name="isbn"></td>
 		</tr>
 		<tr>
 			<th>Title</th>
@@ -167,7 +138,7 @@ if (isset($_POST['add'])) {
 		</tr>
 		<tr>
 			<th>Price</th>
-			<td><input type="text" name="price" required></td>
+			<td><input type="number" name="price" required></td>
 		</tr>
 		<tr>
 			<th>Publisher</th>
@@ -181,7 +152,7 @@ if (isset($_POST['add'])) {
 	<input type="submit" name="add" value="Add new book" class="btn btn-primary">
 	<input type="reset" value="cancel" class="btn btn-default">
 </form>
-<br />
+
 
 <?php
 if (isset($conn)) {
