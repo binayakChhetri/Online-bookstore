@@ -13,15 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	$city = trim($_POST['city']);
 	$zipcode = trim($_POST['zipcode']);
 
-	if (empty($firstname) || empty($lastname) || empty($email) || empty($password) || empty($address) || empty($city) || empty($zipcode)) {
-		header("Location: ../onlinebookstore/signup.php?error=empty_fields");
-		exit();
-	}
-
-	if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-		header("Location: ../onlinebookstore/signup.php?error=invalid_email");
-		exit();
-	}
+	$hashedPassword = md5($password);
 
 	$findUser = "SELECT * FROM customers WHERE email = ?";
 	echo $findUser;
@@ -39,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 	$insertUser = "INSERT INTO customers (firstname, lastname, email, address, password, city, zipcode) VALUES (?, ?, ?, ?, ?, ?, ?)";
 	$stmt = mysqli_prepare($conn, $insertUser);
-	mysqli_stmt_bind_param($stmt, "sssssss", $firstname, $lastname, $email, $address, $password, $city, $zipcode);
+	mysqli_stmt_bind_param($stmt, "sssssss", $firstname, $lastname, $email, $address, $hashedPassword, $city, $zipcode);
 
 	if (mysqli_stmt_execute($stmt)) {
 		mysqli_stmt_close($stmt);
