@@ -36,6 +36,8 @@ if (isset($_POST['save_change'])) {
       $_SESSION['cart']["$isbn"] = $_POST["$isbn"];
     }
   }
+
+
 }
 
 // print out header here
@@ -87,9 +89,11 @@ require "./template/header.php";
                       </div>
                     </td>
                     <td><?php echo "$" . number_format($book['book_price'], 2); ?></td>
-                    <td>
-                      <input type="number" min="0" value="<?php echo $qty; ?>" class="quantity-input"
-                        name="<?php echo $isbn; ?>">
+                    <td style="position: relative;">
+                      <input type="number" min="0" max=<?php echo $book['stock'] ?> value="<?php echo $qty; ?>"
+                        class="quantity-input" name="<?php echo $isbn; ?>">
+                      <br>
+                      <span style="font-size: 14px; position: absolute;"> <?php echo $book['stock'] ?> available </span>
                     </td>
                     <td><strong><?php echo "$" . number_format($qty * $book['book_price'], 2); ?></strong></td>
                   </tr>
@@ -186,10 +190,3 @@ require "./template/header.php";
   }
   ?>
 </div>
-
-<?php
-if (isset($conn)) {
-  mysqli_close($conn);
-}
-require_once "./template/footer.php";
-?>

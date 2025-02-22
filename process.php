@@ -60,15 +60,8 @@ unset($_SESSION['total_items']);
 
 	window.setTimeout(function () {
 
-		window.location.href = "http://localhost/onlineBookStore/index.php";
+		window.location.href = "http://localhost/book_store_system/index.php";
 
 	}, 3000);
 
 </script>
-
-<?php
-if (isset($conn)) {
-	mysqli_close($conn);
-}
-require_once "./template/footer.php";
-?>

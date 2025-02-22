@@ -16,7 +16,7 @@ if (!function_exists("selectLatestBook")) {
 	function selectLatestBook($conn)
 	{
 		$row = array();
-		$query = "SELECT book_title, book_author, book_price, book_isbn, book_image  FROM books ORDER BY book_isbn DESC";
+		$query = "SELECT book_title, book_author, book_price, book_isbn, book_image, stock  FROM books ORDER BY book_isbn DESC";
 		$result = mysqli_query($conn, $query);
 		if (!$result) {
 			echo "Can't retrieve data " . mysqli_error($conn);
@@ -32,7 +32,7 @@ if (!function_exists("selectLatestBook")) {
 if (!function_exists("getBookByIsbn")) {
 	function getBookByIsbn($conn, $isbn)
 	{
-		$query = "SELECT book_title, book_author, book_price FROM books WHERE book_isbn = '$isbn'";
+		$query = "SELECT book_title, book_author, book_price, stock FROM books WHERE book_isbn = '$isbn'";
 		$result = mysqli_query($conn, $query);
 		if (!$result) {
 			echo "Can't retrieve data " . mysqli_error($conn);

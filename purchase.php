@@ -1,11 +1,13 @@
+<style>
+	<?php include './CSS/purchase.css'; ?>
+</style>
+
 <?php
 session_start();
 
 require_once "./functions/database_functions.php";
-// print out header here
 $title = "Purchase";
 require "./template/header.php";
-// connect database
 if (isset($_SESSION['cart']) && (array_count_values($_SESSION['cart']))) {
 	$customer = getCustomerIdbyEmail($_SESSION['email']);
 	?>
@@ -49,7 +51,10 @@ if (isset($_SESSION['cart']) && (array_count_values($_SESSION['cart']))) {
 	</table>
 	<br>
 	<br>
-	<h4 style="margin-left:-20px">Your Inforamtion</h4>
+	<div>
+
+	</div>
+	<h4 style="margin-left:-20px">Your Information</h4>
 	<br>
 	<form method="post" action="process.php" class="form-horizontal">
 		<div class="form-group">
@@ -97,8 +102,3 @@ if (isset($_SESSION['cart']) && (array_count_values($_SESSION['cart']))) {
 } else {
 	echo "<p class=\"text-warning\">Your cart is empty! Please make sure you add some books in it!</p>";
 }
-if (isset($conn)) {
-	mysqli_close($conn);
-}
-require_once "./template/footer.php";
-?>

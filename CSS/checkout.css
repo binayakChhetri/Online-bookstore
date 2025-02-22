@@ -1,0 +1,116 @@
+.checkout-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+}
+
+.alert {
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.alert-danger {
+  background-color: #fff3f3;
+  border: 1px solid #ffcdd2;
+  color: #d32f2f;
+}
+
+.alert a {
+  color: #d32f2f;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.table {
+  width: 100%;
+  margin: 2rem 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table th {
+  background-color: #f8f9fa;
+  padding: 1rem;
+  font-weight: 600;
+  color: #333;
+  text-align: left;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.table td {
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+  color: #444;
+}
+
+.table tr:last-child td,
+.table tr:last-child th {
+  border-bottom: none;
+}
+
+.table td:nth-child(2),
+.table td:nth-child(4),
+.table th:nth-child(2),
+.table th:nth-child(4) {
+  text-align: right;
+}
+
+.table td:nth-child(3),
+.table th:nth-child(3) {
+  text-align: center;
+}
+
+.table tr:last-child {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.form-horizontal {
+  margin: 2rem 0;
+}
+
+.form-group {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #4a90e2;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #357abd;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+}
+
+.lead {
+  color: #666;
+  font-size: 1.1rem;
+  margin: 1.5rem 0;
+  line-height: 1.6;
+}
+
+.text-warning {
+  color: #f57c00;
+  font-size: 1.1rem;
+  margin: 2rem 0;
+  text-align: center;
+}

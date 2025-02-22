@@ -1,10 +1,12 @@
 <style>
   <?php include './CSS/book.css'; ?>
 </style>
+
 <?php
 session_start();
 $book_isbn = $_GET['bookisbn'];
 require_once "./functions/database_functions.php";
+
 $conn = db_connect();
 
 $query = "SELECT * FROM books WHERE book_isbn = '$book_isbn'";
@@ -23,6 +25,7 @@ if (!$row) {
 $title = $row['book_title'];
 require "./template/header.php";
 ?>
+
 <div class="book-container">
   <p class="lead" style="margin: 25px 0"><a href="books.php">Books</a> > <?php echo $row['book_title']; ?></p>
   <div class="row">
@@ -34,7 +37,8 @@ require "./template/header.php";
       <p><?php echo $row['book_descr']; ?></p>
       <h4>Book Details</h4>
       <table class="table">
-        <?php foreach ($row as $key => $value) {
+        <?php
+        foreach ($row as $key => $value) {
           if ($key == "book_descr" || $key == "book_image" || $key == "publisherid" || $key == "book_title") {
             continue;
           }
@@ -52,22 +56,41 @@ require "./template/header.php";
               $key = "Price";
               break;
           }
-          ?>
-          <tr>
-            <td><?php echo $key; ?></td>
-            <td><?php echo $value; ?></td>
-          </tr>
-          <?php
+
+          if ($key === "categoryid") {
+            echo "<tr><td>Category</td>" .
+              "<td>" . getCatName($conn, 2) . "</td></tr>";
+          } else if ($key === "stock") {
+            if ($value == 0) {
+              echo "<tr><td>Out of stock</td></tr>";
+            } else {
+              echo "<tr><td>In stock</td>" .
+                "<td>" . $value . "</td></tr>";
+            }
+
+          } else {
+            echo "<tr>
+                    <td>" . $key . "</td>" .
+              "<td>" . $value . "</td>
+                  </tr>";
+          }
         }
         if (isset($conn)) {
           mysqli_close($conn);
         }
         ?>
       </table>
-      <form method="post" action="cart.php">
-        <input type="hidden" name="bookisbn" value="<?php echo $book_isbn; ?>">
-        <input type="submit" value="Add to cart" name="cart" class="btn-add-to-cart">
-      </form>
+
+      <?php
+      if ($row['stock'] > 0) {
+        ?>
+        <form method="post" action="cart.php">
+          <input type="hidden" name="bookisbn" value="<?php echo $book_isbn; ?>">
+          <input type="submit" value="Add to cart" name="cart" class="btn-add-to-cart">
+        </form>
+        <?php
+      }
+      ?>
     </div>
   </div>
 </div>

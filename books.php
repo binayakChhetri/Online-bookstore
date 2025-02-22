@@ -74,6 +74,7 @@ require_once "./template/header.php";
         <h3><?php echo $book['book_title']; ?></h3>
         <p class="author"><?php echo $book['book_author']; ?></p>
         <p class="price">$<?php echo number_format($book['book_price'], 2); ?></p>
+        <p class="stock"> <?php echo $book['stock'] == "0" ? "Out of stock" : "In stock " . $book['stock'] ?> </p>
       </div>
     </div>
   <?php } ?>

@@ -15,7 +15,6 @@ if (isset($_GET["isbn"]) && $_GET["isbn"] === "already_exists") {
 	echo "<div style='background-color: #f8d7da; color: #721c24; padding: 10px; border-radius: 5px; text-align: center;'>
 			ISBN is already exist. Please use another ISBN.
 		  </div>";
-
 	echo "
 	<script>
 	setTimeout(function () {
@@ -57,6 +56,9 @@ if (isset($_POST['add'])) {
 	$category = trim($_POST['category']);
 	$category = mysqli_real_escape_string($conn, $category);
 
+	$stock = trim($_POST['stock']);
+	$stock = mysqli_real_escape_string($conn, $stock);
+
 	echo $_SERVER['DOCUMENT_ROOT'];
 	$image = "";
 	if (isset($_FILES['image']) && $_FILES['image']['name'] != "") {
@@ -94,10 +96,10 @@ if (isset($_POST['add'])) {
 		$categoryid = $row['categoryid'];
 	}
 
-	$query = "INSERT INTO books (book_isbn, book_title, book_author, book_image, book_descr, book_price, publisherid, categoryid) 
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+	$query = "INSERT INTO books (book_isbn, book_title, book_author, book_image, book_descr, book_price, publisherid, categoryid, stock) 
+              VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	$stmt = $conn->prepare($query);
-	$stmt->bind_param("sssssdii", $isbn, $title, $author, $image, $descr, $price, $publisherid, $categoryid);
+	$stmt->bind_param("sssssdiii", $isbn, $title, $author, $image, $descr, $price, $publisherid, $categoryid, $stock);
 
 	if ($stmt->execute()) {
 		header("Location: admin_book.php");
@@ -142,6 +144,10 @@ if (isset($_POST['add'])) {
 		<tr>
 			<th>Category</th>
 			<td><input type="text" name="category" required></td>
+		</tr>
+		<tr>
+			<th>Stock</th>
+			<td><input type="number" name="stock" required></td>
 		</tr>
 	</table>
 	<input type="submit" name="add" value="Add new book" class="btn btn-primary">

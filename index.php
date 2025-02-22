@@ -21,6 +21,7 @@ $row = selectLatestBook($conn);
         <p class="author">By <?php echo $book['book_author'] ?></p>
         <p class="title"><?php echo $book['book_title'] ?></p>
         <p class="price">$<?php echo $book['book_price'] ?></p>
+        <p class="stock"> <?php echo $book['stock'] == "0" ? "Out of stock" : "In stock " . $book['stock'] ?> </p>
       </div>
     <?php }
     ?>

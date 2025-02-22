@@ -129,7 +129,8 @@
   margin: 8px 0;
 }
 
-.book-details .price {
+.book-details .price,
+.book-details .stock {
   color: #8a2be2;
   font-weight: 600;
   font-size: 16px;
