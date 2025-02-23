@@ -25,6 +25,10 @@ $result = getAll($conn);
 			<span class="glyphicon glyphicon-list-alt"></span>
 			<span class="btn-text">Categories</span>
 		</a>
+		<a href="admin_orders.php" class="admin-btn">
+			<span class="glyphicon glyphicon-list-alt"></span>
+			<span class="btn-text">Orders</span>
+		</a>
 		<?php
 		if (isset($_SESSION['manager']) && $_SESSION['manager'] == true) {
 			echo '<a class="admin-btn" href="admin_add.php">

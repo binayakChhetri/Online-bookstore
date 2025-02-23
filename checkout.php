@@ -1,5 +1,5 @@
 <style>
-	<?php include './css/checkout.css'; ?>
+	<?php include './CSS/checkout.css'; ?>
 </style>
 
 <?php
@@ -64,5 +64,4 @@ if (isset($_SESSION['cart']) && (array_count_values($_SESSION['cart']))) {
 if (isset($conn)) {
 	mysqli_close($conn);
 }
-require_once "./template/footer.php";
 ?>

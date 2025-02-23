@@ -13,6 +13,8 @@ $result = getAllCategories($conn);
 	<a href="admin_book.php" class="btn btn-primary"><span class="glyphicon glyphicon-book"></span>&nbsp;Books</a>
 	<a href="admin_publishers.php" class="btn btn-primary"><span
 			class="glyphicon glyphicon-paperclip"></span>&nbsp;Publishers</a>
+	<a href="admin_orders.php" class="btn btn-primary"><span
+			class="glyphicon glyphicon-paperclip"></span>&nbsp;Orders</a>
 	<?php
 	if (isset($_SESSION['manager']) && $_SESSION['manager'] == true) {
 		echo '<a class="btn btn-primary" href="admin_add.php"><span class="glyphicon glyphicon-plus"></span>&nbsp;Add Book</a>';

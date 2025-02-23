@@ -17,6 +17,7 @@ if (isset($book_isbn)) {
     $_SESSION['cart'] = array();
     $_SESSION['total_items'] = 0;
     $_SESSION['total_price'] = '0.00';
+    $_SESSION['total_price_with_delivery'] = 0;
   }
 
   if (!isset($_SESSION['cart'][$book_isbn])) {
@@ -36,8 +37,6 @@ if (isset($_POST['save_change'])) {
       $_SESSION['cart']["$isbn"] = $_POST["$isbn"];
     }
   }
-
-
 }
 
 // print out header here
@@ -57,6 +56,7 @@ require "./template/header.php";
   if (isset($_SESSION['cart']) && (array_count_values($_SESSION['cart']))) {
     $_SESSION['total_price'] = total_price($_SESSION['cart']);
     $_SESSION['total_items'] = total_items($_SESSION['cart']);
+    $_SESSION['total_price_with_delivery'] = $_SESSION['total_price'] + 20;
     ?>
 
     <form action="cart.php" method="post">

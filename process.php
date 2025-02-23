@@ -1,10 +1,17 @@
+<style>
+	<?php include "CSS/process.css" ?>
+</style>
 <?php
 session_start();
-
+if (!isset($_SESSION["user"])) {
+	header("Location:index.php");
+}
 require_once "./functions/database_functions.php";
 // print out header here
 $title = "Purchase Process";
 require "./template/header.php";
+
+
 // connect database
 $conn = db_connect();
 
@@ -50,13 +57,47 @@ foreach ($_SESSION['cart'] as $isbn => $qty) {
 	}
 }
 
-unset($_SESSION['total_price']);
-unset($_SESSION['cart']);
-unset($_SESSION['total_items']);
+$_SESSION["order_status"] = "order_placed";
+echo ($_SESSION["total_price_with_delivery"]);
+"<br/>";
+echo ($_SESSION['total_items']);
+"<br/>";
+var_dump($_SESSION['cart']);
+
+echo ($_SESSION["customerid"]);
+echo $_SESSION["order_status"];
 
 ?>
-<p class="lead text-success" id="p">Your order has been processed sucessfully..</p>
-<script>
+<div class="order-tracker">
+	<h1 class="process-header">Order Tracker</h1>
+	<div class="tracking-steps">
+		<div class="step completed">
+			<div class="step-icon">✓</div>
+			<div class="step-text">Order Placed</div>
+			<div class="step-date">Mar 15, 2024</div>
+		</div>
+		<div class="step active pending">
+			<div class="step-icon">📝</div>
+			<div class="step-text">Confirmation</div>
+			<div class="step-date">Pending</div>
+		</div>
+		<div class="step">
+			<div class="step-icon">📦</div>
+			<div class="step-text">Processing</div>
+			<div class="step-date">Mar 16, 2024</div>
+		</div>
+		<div class="step">
+			<div class="step-icon">🚚</div>
+			<div class="step-text">Shipping</div>
+			<div class="step-date">Mar 17, 2024</div>
+		</div>
+		<div class="step">
+			<div class="step-icon">✅</div>
+			<div class="step-text">Delivered</div>
+			<div class="step-date">Expected Mar 19</div>
+		</div>
+	</div>
+</div><!-- <script>
 
 	window.setTimeout(function () {
 
@@ -64,4 +105,4 @@ unset($_SESSION['total_items']);
 
 	}, 3000);
 
-</script>
+</script> -->

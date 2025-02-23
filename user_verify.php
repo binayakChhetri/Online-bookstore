@@ -12,7 +12,7 @@ $name = mysqli_real_escape_string($conn, $name);
 
 function check_credentials($table, $userField, $passField, $username, $hashedPassword, $conn)
 {
-	$query = "SELECT $userField, $passField FROM $table WHERE $userField = ?";
+	$query = "SELECT * FROM $table WHERE $userField = ?";
 	$stmt = $conn->prepare($query);
 	$stmt->bind_param("s", $username);
 	$stmt->execute();
@@ -37,9 +37,14 @@ if ($row && $hashedPass === $row['pass']) {
 }
 
 $row = check_credentials('customers', 'email', 'password', $name, $hashedPass, $conn);
+// var_dump($row);
 if ($row && $hashedPass === $row['password']) {
+
 	$_SESSION['user'] = true;
 	$_SESSION['email'] = $name;
+	$_SESSION['customerid'] = $row['id'];
+
+	echo $_SESSION['customerid'];
 	unset($_SESSION['manager'], $_SESSION['expert']);
 	header("Location: index.php");
 	exit();

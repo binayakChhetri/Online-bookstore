@@ -46,7 +46,7 @@ if (isset($_SESSION['cart']) && (array_count_values($_SESSION['cart']))) {
 			<th>Total Including Shipping</th>
 			<th>&nbsp;</th>
 			<th>&nbsp;</th>
-			<th><?php echo "$" . ($_SESSION['total_price'] + 20); ?></th>
+			<th><?php echo "$" . ($_SESSION['total_price_with_delivery']); ?></th>
 		</tr>
 	</table>
 	<br>
