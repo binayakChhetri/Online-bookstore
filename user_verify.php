@@ -44,7 +44,7 @@ if ($row && $hashedPass === $row['password']) {
 	$_SESSION['email'] = $name;
 	$_SESSION['customerid'] = $row['id'];
 
-	echo $_SESSION['customerid'];
+
 	unset($_SESSION['manager'], $_SESSION['expert']);
 	header("Location: index.php");
 	exit();

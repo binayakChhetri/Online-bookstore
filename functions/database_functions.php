@@ -203,4 +203,18 @@ if (!function_exists("getAllNotConfirmedOrders")) {
 		return $result;
 	}
 }
+if (!function_exists("getPendingOrders")) {
+	function getPendingOrders($conn)
+	{
+		$query = "SELECT * FROM orders
+		WHERE order_status != 'confirmed'";
+
+		$result = mysqli_query($conn, $query);
+		if (!$result) {
+			echo "Can't retrieve data " . mysqli_error($conn);
+			exit;
+		}
+		return $result;
+	}
+}
 ?>
