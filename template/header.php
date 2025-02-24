@@ -46,6 +46,7 @@ if (isset($_SESSION['email'])) {
           <li><a href="books.php">Books</a></li>
 
           <li><a href="cart.php">My Cart</a></li>
+          <li><a href="my_orders.php">My Orders</a></li>
           <?php
           if (isset($_SESSION['user'])) {
             echo ' <li><a href="logout.php">LogOut</a></li>' . '<li><a href="profile.php">'

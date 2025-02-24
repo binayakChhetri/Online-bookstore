@@ -191,4 +191,16 @@ if (!function_exists("getAllCategories")) {
 		return $result;
 	}
 }
+if (!function_exists("getAllNotConfirmedOrders")) {
+	function getAllNotConfirmedOrders($conn)
+	{
+		$query = "SELECT * from orders WHERE order_status = 'placed' ORDER BY order_date DESC";
+		$result = mysqli_query($conn, $query);
+		if (!$result) {
+			echo "Can't retrieve data " . mysqli_error($conn);
+			exit;
+		}
+		return $result;
+	}
+}
 ?>

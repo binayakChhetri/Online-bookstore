@@ -1,16 +1,22 @@
 .process-header {
+  margin-top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   color: #333;
 }
 
 .order-tracker {
-  max-width: 900px;
-  margin: 40px auto;
+  max-width: 1300px;
+  margin: auto;
   padding: 20px;
-  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.pending-order-title {
+  color: #333;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .tracking-steps {

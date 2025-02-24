@@ -56,7 +56,7 @@ if (isset($_SESSION['cart']) && (array_count_values($_SESSION['cart']))) {
 	</div>
 	<h4 style="margin-left:-20px">Your Information</h4>
 	<br>
-	<form method="post" action="process.php" class="form-horizontal">
+	<form method="post" action="my_orders.php" class="form-horizontal">
 		<div class="form-group">
 			<label for="exampleInputEmail1">Firstname</label>
 			<input type="text" class="form-control" aria-describedby="emailHelp"
