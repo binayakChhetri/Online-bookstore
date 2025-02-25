@@ -207,7 +207,7 @@ if (!function_exists("getPendingOrders")) {
 	function getPendingOrders($conn)
 	{
 		$query = "SELECT * FROM orders
-		WHERE order_status != 'confirmed'";
+		WHERE order_status != 'confirmed' ORDER BY order_date DESC";
 
 		$result = mysqli_query($conn, $query);
 		if (!$result) {
