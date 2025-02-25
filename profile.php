@@ -61,5 +61,4 @@ if (isset($_SESSION['email'])) {
 if (isset($conn)) {
     mysqli_close($conn);
 }
-require_once "./template/footer.php";
 ?>

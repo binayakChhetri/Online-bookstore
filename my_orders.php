@@ -8,6 +8,7 @@ if (!isset($_SESSION["user"])) {
 	exit();
 }
 
+
 ?>
 <style>
 	<?php include "CSS/my-orders.css" ?>
@@ -20,13 +21,13 @@ $title = "My orders";
 require "./template/header.php";
 
 $conn = db_connect();
-
-$pending_orders = getPendingOrders($conn);
+$customer_id = $_SESSION['customerid'];
+$pending_orders = getPendingOrders($conn, $customer_id);
 ?>
 <div class="order-tracker">
-	<h1 class="process-header">Order Status</h1>
 	<?php
 	if (mysqli_num_rows($pending_orders) != 0) {
+		echo "<h1 class='process-header'>Order Status</h1>";
 		?>
 		<div class="order-container">
 			<?php
@@ -39,62 +40,70 @@ $pending_orders = getPendingOrders($conn);
 				$deliveredClass = ($query_row['order_status'] === 'delivered') ? 'completed' : (($query_row['order_status'] === 'shipping') ? 'active pending' : '');
 				?>
 				<div class="order-detail">
-					<div class="tracking-steps">
-						<div class="step <?php echo $placedClass ?>">
-							<div class="step-icon">✓</div>
-							<div class="step-text">Order Placed</div>
-							<div class="step-date"><?php echo date("g:i A, M d, Y", strtotime($query_row['order_date'])) ?>
+					<?php if ($query_row['order_status'] !== "Cancelled") {
+						?>
+						<div class="tracking-steps">
+							<div class="step <?php echo $placedClass ?>">
+								<div class="step-icon">✓</div>
+								<div class="step-text">Order Placed</div>
+								<div class="step-date"><?php echo date("g:i A, M d, Y", strtotime($query_row['order_date'])) ?>
+								</div>
 							</div>
-						</div>
-						<div class="step <?php echo $confirmClass ?>">
-							<div class="step-icon">📝</div>
-							<div class="step-text">Confirmation</div>
-							<div class="step-date"> <?php
-							if (in_array($query_row['order_status'], ['confirmed', 'processing', 'shipping', 'delivered'])) {
-								echo 'Completed';
-							} else {
-								echo 'Pending';
-							}
-							?></div>
-						</div>
-						<div class="step <?php echo $processingClass ?>">
-							<div class="step-icon">📦</div>
-							<div class="step-text">Processing</div>
-							<div class="step-date">
-								<?php
-								if (in_array($query_row['order_status'], ['processing', 'shipping', 'delivered'])) {
+							<div class="step <?php echo $confirmClass ?>">
+								<div class="step-icon">📝</div>
+								<div class="step-text">Confirmation</div>
+								<div class="step-date"> <?php
+								if (in_array($query_row['order_status'], ['confirmed', 'processing', 'shipping', 'delivered'])) {
+									echo 'Completed';
+								} else {
+									echo 'Pending';
+								}
+								?></div>
+							</div>
+							<div class="step <?php echo $processingClass ?>">
+								<div class="step-icon">📦</div>
+								<div class="step-text">Processing</div>
+								<div class="step-date">
+									<?php
+									if (in_array($query_row['order_status'], ['processing', 'shipping', 'delivered'])) {
+										echo "Completed";
+									} else {
+										echo 'Pending';
+									}
+									?>
+								</div>
+							</div>
+							<div class="step <?php echo $shippingClass ?>">
+								<div class="step-icon">🚚</div>
+								<div class="step-text">Shipping</div>
+								<div class="step-date"> <?php
+								if (in_array($query_row['order_status'], ['shipping', 'delivered'])) {
 									echo "Completed";
 								} else {
 									echo 'Pending';
 								}
-								?>
+								?></div>
+							</div>
+							<div class="step <?php echo $deliveredClass ?>">
+								<div class="step-icon">✅</div>
+								<div class="step-text">Delivered</div>
+								<div class="step-date">
+									<?php
+									if ($query_row['order_status'] === 'delivered') {
+										echo "Completed";
+									} else {
+										echo 'Pending';
+									}
+									?>
+								</div>
 							</div>
 						</div>
-						<div class="step <?php echo $shippingClass ?>">
-							<div class="step-icon">🚚</div>
-							<div class="step-text">Shipping</div>
-							<div class="step-date"> <?php
-							if (in_array($query_row['order_status'], ['shipping', 'delivered'])) {
-								echo "Completed";
-							} else {
-								echo 'Pending';
-							}
-							?></div>
-						</div>
-						<div class="step <?php echo $deliveredClass ?>">
-							<div class="step-icon">✅</div>
-							<div class="step-text">Delivered</div>
-							<div class="step-date">
-								<?php
-								if ($query_row['order_status'] === 'delivered') {
-									echo "Completed";
-								} else {
-									echo 'Pending';
-								}
-								?>
-							</div>
-						</div>
-					</div>
+						<?php
+					} else {
+						?>
+						<h1 class="process-header">This order has been cancelled</h1>
+						<?php
+					} ?>
 					<ul>
 						<li>Order ID: <?php echo $query_row["order_id"] ?></li>
 						<li>Customer ID: <?php echo $query_row["customer_id"] ?></li>
@@ -115,11 +124,9 @@ $pending_orders = getPendingOrders($conn);
 			}
 			?>
 		</div>
-
-
-
-
 		<?php
+	} else {
+		echo "<h1 class='process-header'>No orders to track.</h1>";
 	}
 	?>
 

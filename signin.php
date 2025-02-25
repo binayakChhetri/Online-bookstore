@@ -42,10 +42,7 @@ if (isset($_GET['signup']) && $_GET['signup'] === 'success') {
       <label for="exampleInputPassword1">Password</label>
       <input type="password" class="form-control" placeholder="Password" name="password" required>
     </div>
-
     <button type="submit" class="signin-btn">Submit</button>
-
   </form>
-
 </div>
 </div>

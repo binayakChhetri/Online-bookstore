@@ -204,14 +204,53 @@ if (!function_exists("getAllNotConfirmedOrders")) {
 	}
 }
 if (!function_exists("getPendingOrders")) {
-	function getPendingOrders($conn)
+	function getPendingOrders($conn, $id)
 	{
-		$query = "SELECT * FROM orders
-		WHERE order_status != 'confirmed' ORDER BY order_date DESC";
+		$query = "SELECT * FROM orders WHERE  customer_id = '$id' ORDER BY order_date DESC";
+		$result = mysqli_query($conn, $query);
+		if (!$result) {
+			echo "Can't retrieve data " . mysqli_error($conn);
+			exit;
+		}
+		return $result;
+	}
+}
+
+if (!function_exists("getAllOrders")) {
+	function getAllOrders($conn)
+	{
+		$query = "SELECT * FROM orders 
+		 ORDER BY order_date DESC";
 
 		$result = mysqli_query($conn, $query);
 		if (!$result) {
 			echo "Can't retrieve data " . mysqli_error($conn);
+			exit;
+		}
+		return $result;
+	}
+}
+if (!function_exists("changeOrderStatus")) {
+	function changeOrderStatus($conn, $order_id)
+	{
+		$query = "UPDATE orders SET order_status = 'confirmed' WHERE order_status = 'placed' AND order_id = '$order_id'";
+		$result = mysqli_query($conn, $query);
+		if (!$result) {
+			echo "Can't edit data " . mysqli_error($conn);
+			exit;
+		}
+		return $result;
+	}
+}
+
+if (!function_exists("decreaseStockQuantity")) {
+	function decreaseStockQuantity($conn, $order_id, $book_isbn)
+	{
+		$query = "UPDATE books b JOIN orders o ON b.$book_isbn = o.$order_id 
+		SET b.stock = b.stock - o.quantity WHERE o.order_id = '$order_id'";
+		$result = mysqli_query($conn, $query);
+		if (!$result) {
+			echo "Can't edit data " . mysqli_error($conn);
 			exit;
 		}
 		return $result;
