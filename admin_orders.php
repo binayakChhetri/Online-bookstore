@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+include "update_order_status.php";
+
 if ((!isset($_SESSION['manager']))) {
     header("Location:index.php");
 }
@@ -106,7 +109,15 @@ function confirmOrders($order_id)
         }
         ?>
     </div>
-    <div class="in-process-orders">
 
-    </div>
+    <script>
+        setInterval(() => {
+            fetch("update_order_status.php")
+                .then(response => response.text())
+                .then(data => console.log(data))
+                .catch(error => console.error("Error:", error));
+        }, 10000)
+    </script>
+
+
 </div>

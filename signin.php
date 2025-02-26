@@ -45,4 +45,3 @@ if (isset($_GET['signup']) && $_GET['signup'] === 'success') {
     <button type="submit" class="signin-btn">Submit</button>
   </form>
 </div>
-</div>

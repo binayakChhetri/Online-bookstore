@@ -242,12 +242,10 @@ if (!function_exists("changeOrderStatus")) {
 		return $result;
 	}
 }
-
-if (!function_exists("decreaseStockQuantity")) {
-	function decreaseStockQuantity($conn, $order_id, $book_isbn)
+if (!function_exists("changeOrderStatusToDelivered")) {
+	function changeOrderStatusToDelivered($conn, $order_id)
 	{
-		$query = "UPDATE books b JOIN orders o ON b.$book_isbn = o.$order_id 
-		SET b.stock = b.stock - o.quantity WHERE o.order_id = '$order_id'";
+		$query = "UPDATE orders SET order_status = 'confirmed' WHERE order_status = 'placed' AND order_id = '$order_id'";
 		$result = mysqli_query($conn, $query);
 		if (!$result) {
 			echo "Can't edit data " . mysqli_error($conn);
@@ -256,4 +254,5 @@ if (!function_exists("decreaseStockQuantity")) {
 		return $result;
 	}
 }
+
 ?>
