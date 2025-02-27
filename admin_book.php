@@ -50,6 +50,7 @@ $result = getAll($conn);
 				<th>Price ($)</th>
 				<th>Publisher</th>
 				<th>Category</th>
+				<th>Stock</th>
 				<th>&nbsp;</th>
 				<th>&nbsp;</th>
 			</tr>
@@ -65,6 +66,7 @@ $result = getAll($conn);
 					<td class="price"><?php echo $row['book_price']; ?></td>
 					<td><?php echo getPubName($conn, $row['publisherid']); ?></td>
 					<td><?php echo getCatName($conn, $row['categoryid']); ?></td>
+					<td><?php echo $row['stock'] ?></td>
 					<?php
 					if (isset($_SESSION['manager']) && $_SESSION['manager'] == true) {
 						echo '<td><a href="admin_edit.php?bookisbn=' . $row['book_isbn'] . '" class="action-btn edit-btn">

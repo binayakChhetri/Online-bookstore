@@ -227,6 +227,7 @@ if (!function_exists("getAllOrders")) {
 			echo "Can't retrieve data " . mysqli_error($conn);
 			exit;
 		}
+		
 		return $result;
 	}
 }

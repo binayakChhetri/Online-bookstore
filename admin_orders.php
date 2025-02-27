@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-include "update_order_status.php";
-
 if ((!isset($_SESSION['manager']))) {
     header("Location:index.php");
 }
@@ -116,8 +114,7 @@ function confirmOrders($order_id)
                 .then(response => response.text())
                 .then(data => console.log(data))
                 .catch(error => console.error("Error:", error));
-        }, 10000)
+        }, 30000)
     </script>
-
 
 </div>
