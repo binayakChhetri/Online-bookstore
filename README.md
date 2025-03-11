@@ -23,7 +23,7 @@ Online book store website developed by PHP, HTML, Javascript and CSS.
   - Add, remove  publishers
   - Add, remove categories
   - Confirm or cancel the order. Can see the status of order.
-  -   
+    
 ## Getting started
  1. Install Xampp if not already installed. Can be downloaded from https://www.apachefriends.org/download.html
  2. Place the repository in htdocs folder of xampp
