@@ -1,4 +1,4 @@
-Online book store website developed by PHP, HTML, Javascript, CSS and Bootstrap.
+Online book store website developed by PHP, HTML, Javascript and CSS.
 
 ## Features
 - Homepage
@@ -11,6 +11,7 @@ Online book store website developed by PHP, HTML, Javascript, CSS and Bootstrap.
   - Signup and login
   - Edit profile
   - Add books to shopping cart and finalize purchase
+  - Can order the books and see its status.
   - See purchase history
   
 - Books
@@ -18,15 +19,11 @@ Online book store website developed by PHP, HTML, Javascript, CSS and Bootstrap.
     - Sort books by Author,Price or Title
     
 - Manager panel
-  - Add or remove books
-  - Add or remove publishers
-  - Add or remove categories
-  
-- Expert panel
-  - Edit books
-  - Edit publishers
-  - Edit categories
-  
+  - Add, remove and edit books
+  - Add, remove  publishers
+  - Add, remove categories
+  - Confirm or cancel the order. Can see the status of order.
+  -   
 ## Getting started
  1. Install Xampp if not already installed. Can be downloaded from https://www.apachefriends.org/download.html
  2. Place the repository in htdocs folder of xampp
@@ -34,39 +31,3 @@ Online book store website developed by PHP, HTML, Javascript, CSS and Bootstrap.
  4. Create a database and name it bookstore in MySql.
  5. Import the database bookstore.sql file in MySql.
  6. Open localhost/onlinebookstore/ in your browser.
- 
- ## Screenshots
- 
- <p align="center"><b>Homepage
- <br>
-<img alt="Homepage screenshot" src="https://github.com/KhatereTajfar/Bookland-Online-Book-Store-Website/blob/master/media/homepage.png" />
-<br>
-<br>Search
-<br>
-<img alt="Search screenshot" src="https://github.com/KhatereTajfar/Bookland-Online-Book-Store-Website/blob/master/media/search.png" />
-<br>Sort
-<br>
-<img alt="Search screenshot" src="https://github.com/KhatereTajfar/Bookland-Online-Book-Store-Website/blob/master/media/sort.png" />
-<br>Category List
-<br>
-<img alt="Search screenshot" src="https://github.com/KhatereTajfar/Bookland-Online-Book-Store-Website/blob/master/media/catlist.png" />
-<br>Books Per Category
-<br>
-<img alt="Search screenshot" src="https://github.com/KhatereTajfar/Bookland-Online-Book-Store-Website/blob/master/media/bookpercat.png" />
-<br>Book Details
-<br>
-<img alt="Search screenshot" src="https://github.com/KhatereTajfar/Bookland-Online-Book-Store-Website/blob/master/media/book.png" />
-<br>Cart and purchase history
-<br>
-<img alt="Search screenshot" src="https://github.com/KhatereTajfar/Bookland-Online-Book-Store-Website/blob/master/media/cart.png" />
-<br>Purchase
-<br>
-<img alt="Search screenshot" src="https://github.com/KhatereTajfar/Bookland-Online-Book-Store-Website/blob/master/media/purchase.jpg" />
-<br>Manager Panel
-<br>
-<img alt="Search screenshot" src="https://github.com/KhatereTajfar/Bookland-Online-Book-Store-Website/blob/master/media/managerpanel.png" />
-</p>
-
-## Contact me
-In case you have any question contact me via email. 
-  tajfar.khatere@yahoo.com
