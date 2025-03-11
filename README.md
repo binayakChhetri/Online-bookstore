@@ -18,7 +18,7 @@ Online book store website developed by PHP, HTML, Javascript and CSS.
     - Search for books by keyword
     - Sort books by Author,Price or Title
     
-- Manager panel
+- Manager/Admin panel
   - Add, remove and edit books
   - Add, remove  publishers
   - Add, remove categories
