@@ -28,6 +28,6 @@ Online book store website developed by PHP, HTML, Javascript and CSS.
  1. Install Xampp if not already installed. Can be downloaded from https://www.apachefriends.org/download.html
  2. Place the repository in htdocs folder of xampp
  3. Go to Xampp control panel and start apache and MySql.
- 4. Create a database and name it bookstore in MySql.
- 5. Import the database bookstore.sql file in MySql.
- 6. Open localhost/onlinebookstore/ in your browser.
+ 4. Create a database and name it bookstore in MySql
+ 5. Import the database bookstore.sql file in MySql
+ 6. Open localhost/onlinebookstore/ in your browser
