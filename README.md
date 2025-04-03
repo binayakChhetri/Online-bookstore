@@ -2,9 +2,6 @@
 
 ## Features
 - Homepage
-  - Recent books
-  - Show books by category
-  - Show books by publisher
   - Show full catalog of books
   
 - User
