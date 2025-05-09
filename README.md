@@ -2,7 +2,7 @@
 
 ## Features
 - Homepage
-  - Show full catalog of books
+  -- Show full catalog of books
   
 - User
   - Signup and login
