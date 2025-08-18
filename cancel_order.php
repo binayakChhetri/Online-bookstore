@@ -13,7 +13,7 @@ if (isset($_POST['cancel'])) {
         mysqli_stmt_bind_param($stmt, "s", $order_id);
         $result = mysqli_stmt_execute($stmt);
 
-        // if (!$result) {
+        if (!$result) {
             echo "Error updating order status: " . mysqli_error($conn);
             return false;
         }
